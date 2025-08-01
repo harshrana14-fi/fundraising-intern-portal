@@ -118,25 +118,21 @@ export default function HomePage() {
       step: "01",
       title: "Sign Up & Get Onboarded",
       description: "Create your account and complete our comprehensive onboarding process to understand your role and goals.",
-      icon: <CheckCircle size={24} />
     },
     {
       step: "02",
       title: "Get Your Referral Code",
       description: "Receive your unique referral code and start building your network. Earn bonus rewards for every successful referral.",
-      icon: <Share2 size={24} />
     },
     {
       step: "03",
       title: "Set Goals & Start Fundraising",
       description: "Work with our team to establish realistic targets and use our tools to reach potential donors effectively.",
-      icon: <Target size={24} />
     },
     {
       step: "04",
       title: "Track Progress & Earn Rewards",
       description: "Monitor your performance in real-time, unlock achievements, and earn tangible rewards as you hit milestones.",
-      icon: <Trophy size={24} />
     }
   ];
 
@@ -270,11 +266,6 @@ export default function HomePage() {
               <div key={index} className="text-center">
                 <div className="bg-blue-600 text-white text-2xl font-bold rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-4">
                   {item.step}
-                </div>
-                <div className="bg-slate-100 rounded-full p-3 w-12 h-12 flex items-center justify-center mx-auto mb-4">
-                  <div className="text-blue-600">
-                    {item.icon}
-                  </div>
                 </div>
                 <h3 className="text-lg font-bold text-slate-800 mb-3">{item.title}</h3>
                 <p className="text-slate-600 text-sm">{item.description}</p>
