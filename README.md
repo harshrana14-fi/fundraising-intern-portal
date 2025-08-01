@@ -86,6 +86,7 @@ npm install
 Create a `.env.local` file in the root directory:
 ```env
 I will give u those keys.
+```
 
 5. **Run the development server**
 ```bash
