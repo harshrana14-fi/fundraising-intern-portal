@@ -36,7 +36,7 @@ export default function AuthPage() {
     console.log("Response:", data);
 
     if (response.ok) {
-
+      document.cookie = `token=${data.token}; path=/; max-age=...; SameSite=Lax; Secure`;
       console.log("Redirecting to /dashboard...");
       router.push('/dashboard');
     } else {
