@@ -182,7 +182,7 @@ Or create a new account through the signup process.
 
 ### 🌐 Live Deployment on Vercel
 This project is deployed and live on Vercel.
-🔗 Live URL: https://fundraising-intern-portal.vercel.app/
+- 🔗 Live URL: https://fundraising-intern-portal.vercel.app/
 
 ### Security Features
 - Password hashing with bcryptjs
