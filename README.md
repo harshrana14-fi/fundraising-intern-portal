@@ -178,48 +178,6 @@ For testing purposes, you can use these demo credentials:
 
 Or create a new account through the signup process.
 
-## API Testing with Postman
-
-### 1. Create a new user
-```bash
-POST http://localhost:3000/api/auth/signup
-Content-Type: application/json
-
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "password123"
-}
-```
-
-### 2. Login
-```bash
-POST http://localhost:3000/api/auth/login
-Content-Type: application/json
-
-{
-  "email": "john@example.com",
-  "password": "password123"
-}
-```
-
-### 3. Get user data
-```bash
-GET http://localhost:3000/api/user
-Cookie: token=<your-jwt-token>
-```
-
-### 4. Get leaderboard
-```bash
-GET http://localhost:3000/api/leaderboard
-Cookie: token=<your-jwt-token>
-```
-
-### 5. Initialize dummy data
-```bash
-POST http://localhost:3000/api/leaderboard
-```
-
 ## Deployment
 
 ### 🌐 Live Deployment on Vercel
