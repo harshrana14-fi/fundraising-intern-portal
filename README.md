@@ -85,14 +85,7 @@ npm install
 3. **Set up environment variables**
 Create a `.env.local` file in the root directory:
 ```env
-# MONGODB_URI=mongodb+srv://jatoliyaharsh8:40pZKb5oXZF7ju5Y@cluster0.ys9ynjl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-
-JWT_SECRET=15b24a29185a9a02e1b9b0f6755fc39557ac77847b00d16d256411aa38948bac4ab91b41ce812d8de0bf4ed61eb4f5041c1d0d008e82c618af8ea415e843bc6c
-NEXTAUTH_URL=http://localhost:3000
-```
-
-4. **Start MongoDB**
-Make sure MongoDB is running on your local machine or you have access to MongoDB Atlas.
+I will give u those keys.
 
 5. **Run the development server**
 ```bash
@@ -228,20 +221,9 @@ POST http://localhost:3000/api/leaderboard
 
 ## Deployment
 
-### Vercel (Recommended)
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Add environment variables in Vercel dashboard
-4. Deploy automatically
-
-### Environment Variables for Production
-```env
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/fundraising-portal
-JWT_SECRET=your-production-jwt-secret-key
-NEXTAUTH_URL=https://your-domain.vercel.app
-```
-
-## Development Notes
+### 🌐 Live Deployment on Vercel
+This project is deployed and live on Vercel.
+🔗 Live URL: https://fundraising-intern-portal.vercel.app/
 
 ### Security Features
 - Password hashing with bcryptjs
@@ -255,14 +237,6 @@ NEXTAUTH_URL=https://your-domain.vercel.app
 - Efficient database queries
 - Optimized component rendering
 - Image optimization with Next.js
-
-### Code Quality
-- TypeScript-ready structure
-- ESLint configuration
-- Modular component architecture
-- Reusable utility functions
-
-## Troubleshooting
 
 ### Common Issues
 
@@ -306,21 +280,9 @@ NEXTAUTH_URL=https://your-domain.vercel.app
 - **Search Functionality**: Search and filter capabilities
 - **Pagination**: Handle large datasets efficiently
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## License
 
 This project is created for educational and demonstration purposes.
-
-## Support
-
-For questions or support, please create an issue in the GitHub repository.
 
 ---
 
