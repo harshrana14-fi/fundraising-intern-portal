@@ -85,11 +85,9 @@ npm install
 3. **Set up environment variables**
 Create a `.env.local` file in the root directory:
 ```env
-MONGODB_URI=mongodb://localhost:27017/fundraising-portal
-# Or for MongoDB Atlas:
-# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/fundraising-portal
+# MONGODB_URI=mongodb+srv://jatoliyaharsh8:40pZKb5oXZF7ju5Y@cluster0.ys9ynjl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
-JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+JWT_SECRET=15b24a29185a9a02e1b9b0f6755fc39557ac77847b00d16d256411aa38948bac4ab91b41ce812d8de0bf4ed61eb4f5041c1d0d008e82c618af8ea415e843bc6c
 NEXTAUTH_URL=http://localhost:3000
 ```
 
