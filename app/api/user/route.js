@@ -1,3 +1,4 @@
+// app/api/user/route.js
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import connectDB from '../../../lib/mongodb';
