@@ -1,12 +1,11 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import connectDB from '../../../lib/mongodb';
-import User from '../../../lib/models/User';
-import { verifyToken } from '../../../lib/utils';
+import connectDB from '@/lib/mongodb';
+import User from '@/lib/models/User';
+import { verifyToken } from '@/lib/utils';
 
 export async function GET() {
   try {
-    // Get token from cookies for authentication
     const cookieStore = cookies();
     const token = cookieStore.get('token')?.value;
 
@@ -17,7 +16,6 @@ export async function GET() {
       );
     }
 
-    // Verify token
     const decoded = verifyToken(token);
     if (!decoded) {
       return NextResponse.json(
@@ -25,17 +23,12 @@ export async function GET() {
         { status: 401 }
       );
     }
-
-    // Connect to database
     await connectDB();
 
-    // Get all active users sorted by total donations (descending)
     const users = await User.find({ isActive: true })
       .select('-password -email -rewards -createdAt -updatedAt')
       .sort({ totalDonations: -1 })
-      .limit(50); // Limit to top 50 users
-
-    // Add rank to each user and format response
+      .limit(50); 
     const leaderboard = users.map((user, index) => ({
       id: user._id.toString(),
       name: user.name,
@@ -55,13 +48,10 @@ export async function GET() {
   }
 }
 
-// Add dummy data endpoint for initial setup
 export async function POST() {
   try {
-    // Connect to database
     await connectDB();
 
-    // Check if we already have users
     const existingUsers = await User.countDocuments();
     if (existingUsers > 0) {
       return NextResponse.json(
@@ -70,7 +60,6 @@ export async function POST() {
       );
     }
 
-    // Create dummy users for leaderboard
     const dummyUsers = [
       {
         name: 'Sarah Johnson',
@@ -89,46 +78,6 @@ export async function POST() {
         isActive: true,
       },
       {
-        name: 'Emma Wilson',
-        email: 'emma.wilson@example.com',
-        password: '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj9jWd5vH9K6',
-        referralCode: 'emmawilson2025',
-        totalDonations: 19200,
-        isActive: true,
-      },
-      {
-        name: 'Alex Rodriguez',
-        email: 'alex.rodriguez@example.com',
-        password: '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj9jWd5vH9K6',
-        referralCode: 'alexrodriguez2025',
-        totalDonations: 16800,
-        isActive: true,
-      },
-      {
-        name: 'Lisa Park',
-        email: 'lisa.park@example.com',
-        password: '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj9jWd5vH9K6',
-        referralCode: 'lisapark2025',
-        totalDonations: 14500,
-        isActive: true,
-      },
-      {
-        name: 'David Kim',
-        email: 'david.kim@example.com',
-        password: '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj9jWd5vH9K6',
-        referralCode: 'davidkim2025',
-        totalDonations: 12200,
-        isActive: true,
-      },
-      {
-        name: 'Rachel Green',
-        email: 'rachel.green@example.com',
-        password: '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj9jWd5vH9K6',
-        referralCode: 'rachelgreen2025',
-        totalDonations: 10750,
-        isActive: true,
-      },
-      {
         name: 'Demo User',
         email: 'demo@example.com',
         password: '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj9jWd5vH9K6', // 'demo123'
@@ -138,10 +87,8 @@ export async function POST() {
       }
     ];
 
-    // Insert dummy users
     await User.insertMany(dummyUsers);
 
-    // Calculate ranks for all users
     const users = await User.find({ isActive: true });
     for (const user of users) {
       await user.calculateRank();

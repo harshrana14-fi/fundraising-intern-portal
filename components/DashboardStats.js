@@ -1,8 +1,7 @@
 'use client';
-
 import { TrendingUp, Gift, Trophy, Users, Copy, Check } from 'lucide-react';
 import { useState } from 'react';
-import { formatCurrency, getRankSuffix } from '../lib/utils';
+import { formatCurrency, getRankSuffix } from '@/lib/utils';
 
 export default function DashboardStats({ user }) {
   const [copied, setCopied] = useState(false);

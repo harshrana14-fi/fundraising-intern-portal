@@ -1,7 +1,7 @@
 'use client';
 
 import { Gift, Star, TrendingUp, Medal, Trophy, Crown, Lock } from 'lucide-react';
-import { rewards, formatCurrency } from '../lib/utils';
+import { rewards, formatCurrency } from '@/lib/utils';
 
 export default function RewardsSection({ user }) {
   const getIcon = (iconName) => {
@@ -33,7 +33,6 @@ export default function RewardsSection({ user }) {
 
   return (
     <div className="space-y-6">
-      {/* Progress to Next Reward */}
       {nextReward && (
         <div className="bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl p-6 text-white">
           <div className="flex items-center justify-between mb-4">
@@ -64,7 +63,6 @@ export default function RewardsSection({ user }) {
         </div>
       )}
 
-      {/* Rewards Grid */}
       <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
         <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center">
           <Gift className="mr-2 text-purple-500" size={24} />
@@ -86,7 +84,6 @@ export default function RewardsSection({ user }) {
                     : 'border-gray-200 bg-gray-50 hover:bg-gray-100'
                 }`}
               >
-                {/* Unlock Status Badge */}
                 <div className="absolute top-2 right-2">
                   {unlocked ? (
                     <div className="bg-green-500 text-white rounded-full p-1">
@@ -139,7 +136,6 @@ export default function RewardsSection({ user }) {
           })}
         </div>
 
-        {/* Summary Stats */}
         <div className="mt-6 pt-6 border-t border-gray-200">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div>

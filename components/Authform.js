@@ -1,4 +1,3 @@
-// components/Authform.js
 'use client';
 
 import { useState } from 'react';
@@ -24,7 +23,6 @@ export default function AuthForm() {
     setError('');
     setSuccess('');
 
-    // Client-side validation
     if (!formData.email || !formData.password) {
       setError('Please fill in all required fields');
       setLoading(false);
@@ -61,11 +59,9 @@ export default function AuthForm() {
 
       if (response.ok) {
         setSuccess(isLogin ? 'Login successful!' : 'Account created successfully!');
-        
-        // Set cookie and redirect
+
         document.cookie = `token=${data.token}; path=/; max-age=${7 * 24 * 60 * 60}; secure; samesite=strict`;
-        
-        // Small delay to show success message
+
         setTimeout(() => {
           router.push('/dashboard');
         }, 1000);
@@ -86,8 +82,7 @@ export default function AuthForm() {
       ...prev,
       [name]: value
     }));
-    
-    // Clear errors when user starts typing
+
     if (error) setError('');
   };
 
@@ -101,7 +96,6 @@ export default function AuthForm() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md transform hover:scale-105 transition-transform duration-300">
-        {/* Header */}
         <div className="text-center mb-8">
           <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-full p-3 w-16 h-16 mx-auto mb-4 flex items-center justify-center">
             <Gift className="text-white" size={28} />
@@ -112,7 +106,6 @@ export default function AuthForm() {
           </p>
         </div>
 
-        {/* Success Message */}
         {success && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-4 flex items-center">
             <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-green-600 mr-2"></div>
@@ -120,7 +113,6 @@ export default function AuthForm() {
           </div>
         )}
 
-        {/* Error Message */}
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4">
             <div className="flex items-center">
@@ -132,9 +124,7 @@ export default function AuthForm() {
           </div>
         )}
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Name Field (only for signup) */}
           {!isLogin && (
             <div>
               <label className="block text-gray-700 font-medium mb-2">
@@ -153,7 +143,6 @@ export default function AuthForm() {
             </div>
           )}
           
-          {/* Email Field */}
           <div>
             <label className="block text-gray-700 font-medium mb-2">
               Email Address <span className="text-red-500">*</span>
@@ -169,8 +158,7 @@ export default function AuthForm() {
               disabled={loading}
             />
           </div>
-          
-          {/* Password Field */}
+
           <div>
             <label className="block text-gray-700 font-medium mb-2">
               Password <span className="text-red-500">*</span>
@@ -202,8 +190,7 @@ export default function AuthForm() {
               </p>
             )}
           </div>
-          
-          {/* Submit Button */}
+
           <button
             type="submit"
             disabled={loading}
@@ -219,8 +206,7 @@ export default function AuthForm() {
             )}
           </button>
         </form>
-        
-        {/* Toggle Auth Mode */}
+
         <div className="text-center mt-6">
           <button
             onClick={toggleAuthMode}
@@ -233,17 +219,6 @@ export default function AuthForm() {
             }
           </button>
         </div>
-
-        {/* Demo Credentials (for testing) */}
-        {isLogin && (
-          <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-            <p className="text-xs text-gray-600 text-center mb-2">For demo purposes:</p>
-            <div className="text-xs text-gray-500 space-y-1">
-              <p>Email: demo@example.com</p>
-              <p>Password: demo123</p>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

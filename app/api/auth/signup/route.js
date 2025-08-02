@@ -1,14 +1,12 @@
-// app/api/auth/signup/route.js
 import { NextResponse } from 'next/server';
-import connectDB from '../../../../lib/mongodb';
-import User from '../../../../lib/models/User';
-import { hashPassword, generateToken } from '../../../../lib/utils';
+import connectDB from '@/lib/mongodb';
+import User from '@/lib/models/User';
+import { hashPassword, generateToken } from '@/lib/utils';
 
 export async function POST(request) {
   try {
     const { name, email, password } = await request.json();
 
-    // Validate input
     if (!name || !email || !password) {
       return NextResponse.json(
         { message: 'Please provide all required fields' },
@@ -23,7 +21,6 @@ export async function POST(request) {
       );
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
@@ -32,18 +29,14 @@ export async function POST(request) {
       );
     }
 
-    // Name validation
     if (name.trim().length < 2) {
       return NextResponse.json(
         { message: 'Name must be at least 2 characters long' },
         { status: 400 }
       );
     }
-
-    // Connect to database
     await connectDB();
 
-    // Check if user already exists
     const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
       return NextResponse.json(
@@ -52,10 +45,8 @@ export async function POST(request) {
       );
     }
 
-    // Generate referral code
     const baseReferralCode = name.toLowerCase().replace(/[^a-z0-9]/g, '') + '2025';
-    
-    // Check if referral code already exists, if so, add a number
+
     let finalReferralCode = baseReferralCode;
     let counter = 1;
     while (await User.findOne({ referralCode: finalReferralCode })) {
@@ -63,10 +54,8 @@ export async function POST(request) {
       counter++;
     }
 
-    // Hash password
     const hashedPassword = await hashPassword(password);
 
-    // Create user with some dummy data for demo
     const newUser = new User({
       name: name.trim(),
       email: email.toLowerCase(),
@@ -79,15 +68,11 @@ export async function POST(request) {
     });
 
     await newUser.save();
-
-    // Calculate rank
     await newUser.calculateRank();
     await newUser.save();
 
-    // Generate JWT token
     const token = generateToken(newUser._id);
 
-    // Return user data (without password)
     const userResponse = {
       _id: newUser._id,
       name: newUser.name,
@@ -107,8 +92,7 @@ export async function POST(request) {
 
   } catch (error) {
     console.error('Signup error:', error);
-    
-    // Handle duplicate key error (just in case)
+
     if (error.code === 11000) {
       const field = Object.keys(error.keyPattern)[0];
       return NextResponse.json(
